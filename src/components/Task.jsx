@@ -50,7 +50,6 @@ function Task({ id, text, completed, onComplete, onDelete, onEdit, editionMode, 
           </div>
       }
 
-
     </div>
   );
 }
