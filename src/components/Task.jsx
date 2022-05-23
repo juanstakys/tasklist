@@ -4,7 +4,9 @@ import { BsFillPencilFill } from 'react-icons/bs';
 import { IoIosCheckmark } from 'react-icons/io';
 import '../styles/Task.css';
 
-function Task({ id, text, completed, onComplete, onDelete, onEdit, editionMode }) {
+function Task({ id, text, completed, onComplete, onDelete, onEdit, editionMode, updateTask }) {
+
+  const [taskText, setTaskText] = React.useState(text);
 
 
   return (
@@ -26,7 +28,8 @@ function Task({ id, text, completed, onComplete, onDelete, onEdit, editionMode }
           :
           <input
             className="task-text-edition"
-            value={text}
+            defaultValue={taskText}
+            onChange={(e) => setTaskText(e.target.value)}
           />
       }
 
@@ -42,10 +45,10 @@ function Task({ id, text, completed, onComplete, onDelete, onEdit, editionMode }
           :
           <div className="task-actions">
             <IoIosCheckmark 
-              className="task-button" />
+              className="task-button" 
+              onClick={()=>updateTask(id, taskText)}/>
           </div>
       }
-
 
 
     </div>
