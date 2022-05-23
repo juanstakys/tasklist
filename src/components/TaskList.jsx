@@ -33,6 +33,16 @@ function TaskList() {
     setTasks(updatedTasks);
   }
 
+  const editTask = (id) => {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+        task.editionMode = !task.editionMode;
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  }
+
   return (
     <>
       <TaskForm onSubmit={addTask}/>
@@ -44,8 +54,10 @@ function TaskList() {
               id={task.id}
               text={task.text}
               completed={task.completed}
-              onDelete={removeTask}
               onComplete={completeTask}
+              onDelete={removeTask}
+              onEdit={editTask}
+              editionMode={task.editionMode}
               />
           ))
         }

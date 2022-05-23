@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { BsFillPencilFill } from 'react-icons/bs';
+import { IoIosCheckmark } from 'react-icons/io';
 import '../styles/Task.css';
 
 function Task({ id, text, completed, onComplete, onDelete, onEdit, editionMode }) {
@@ -16,22 +17,35 @@ function Task({ id, text, completed, onComplete, onDelete, onEdit, editionMode }
 
       {
         !editionMode
-          ? <div
+          ?
+          <div
             className="task-text"
             onClick={() => onComplete(id)}>
             {text}
-            </div>
+          </div>
           :
           <input
-          className="task-text"
-          value={text}
+            className="task-text-edition"
+            value={text}
           />
       }
 
-      <AiOutlineCloseCircle className="task-button"
-        onClick={() => onDelete(id)} />
-      <BsFillPencilFill className="task-button"
-        onClick={() => onEdit(id)} />
+      {
+        !editionMode
+          ?
+          <div className="task-actions">
+            <AiOutlineCloseCircle className="task-button"
+              onClick={() => onDelete(id)} />
+            <BsFillPencilFill className="task-button"
+              onClick={() => onEdit(id)} />
+          </div>
+          :
+          <div className="task-actions">
+            <IoIosCheckmark 
+              className="task-button" />
+          </div>
+      }
+
 
 
     </div>
