@@ -5,7 +5,17 @@ import '../styles/TaskList.css';
 
 function TaskList() {
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem('tasks');
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
+  
+  
+  React.useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+  
 
   const addTask = (task) => {
     console.log('addTask')
